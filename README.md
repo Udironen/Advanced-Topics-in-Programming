@@ -8,7 +8,7 @@
 	-	A separation of data into blocks or cells, to allow quick search of given coordinates (which road I’m on? what is near me?) without the need to search the entire map
 
 
-	Features:
+Features:
 
 	The GIS can load a Json file by the following structure:
 	[
