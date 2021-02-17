@@ -1,5 +1,4 @@
-===============================================================================================================================================================================
-===============================================================================================================================================================================
+
 # Advanced-Topics-in-Programming-GIS
 
 The GIS data is based on:
@@ -8,10 +7,9 @@ The GIS data is based on:
 -	Junctions and roads, represented as coordinates connected by ways/arcs
 -	A separation of data into blocks or cells, to allow quick search of given coordinates (which road I’m on? what is near me?) without the need to search the entire map
 
-#########################################################################
+
 Features:
 
-----------------------------------------------------------
 The GIS can load a Json file by the following structure:
 [
   {
@@ -64,21 +62,20 @@ The GIS can load a Json file by the following structure:
   },
   
 ]
----------------------------------------------------------------
+
 
 The GIS can save the data it contains to a Json file with the same structure.
---------------------------------------------------------------------------------
+-
 The GIS can search entities by name, and also in a restricted erea.
-----------------------------------------------------------------------------
+-
 The GIS can find the closest way to a specific coordinates, and the closest coordinates on it.
-------------------------------------------------------------------------------------------------
+-
 The GIS can find the closest point on an entity of the GIS to another coordinates.
---------------------------------------------------------------------------------------------------
+-
 
-####################################################################################################################
 
 API for searching data
-
+-
 Types
 template<typename T>
 class NamedType {
@@ -110,9 +107,9 @@ public:
        }
 };
 
-#########################################################################################################################################################################################################################
 
 GIS Public Functions:
+-
 
 std::size_t GIS::clear();
 the function clears all data from the system and returns the number of entities that were cleared
@@ -163,54 +160,51 @@ const Way& getWay(const EntityId& wayId) const;
 std::pair<Coordinates, EntityId> getWayClosestPoint(
 	const Coordinates&, const Restrictions& res) const;
 
-################################################################################################################################################################################################################
 
 Assisting Mendatory Classes:
-
--	Entity, described by:
-#	[optional in loaded files / mandatory in saved files] id: unique across all type of entities (string)
-#	name: a short descriptive name (string)
-#	[optional] description: longer description (string)
-#	[optional] category_tags: a list of tags (strings) - may be empty
+-
+	Entity, described by:
+	[optional in loaded files / mandatory in saved files] id: unique across all type of entities (string)
+	name: a short descriptive name (string)
+	[optional] description: longer description (string)
+	[optional] category_tags: a list of tags (strings) - may be empty
 	all functions and constructors are mentioned in the documentation of ths code
 
 
--	POI (point of interest), inheritates from Entity, described by:
-#	all Entity fields
-#	[optional] accessibility: may be tagged with accessibility flags (“by car”, “by foot”, “by wheelchair”)
-#	geometry: 
+	POI (point of interest), inheritates from Entity, described by:
+	all Entity fields
+	[optional] accessibility: may be tagged with accessibility flags (“by car”, “by foot”, “by wheelchair”)
+	geometry: 
 		Circle: 
 			coordinates: as center of circle 
 			Radius: in meters
 	all functions and constructors are mentioned in the documentation of ths code
 
 
--	Junction, inheritates from Entity, described by:
-#	all Entity fields
-#	coordinates
+	Junction, inheritates from Entity, described by:
+	all Entity fields
+	coordinates
 	all functions and constructors are mentioned in the documentation of ths code
 
 
--	Way, inheritates from Entity, described by:
-#	all Entity fields
-#	from: EntityId of a junction 
-#	to: EntityId of a junction 
-#	[optional]: curves: coordinates setting the Way’s layout, in order (from => to)
-#	direction: “bidirectional” (two-ways) OR “unidirectional” (from => to)  
-#	speed_limit: in km/h
-#	toll_road: true / false
-#	Coordinates from_coords;
-#	Coordinates to_coords;
+	Way, inheritates from Entity, described by:
+	all Entity fields
+	from: EntityId of a junction 
+	to: EntityId of a junction 
+	[optional]: curves: coordinates setting the Way’s layout, in order (from => to)
+	direction: “bidirectional” (two-ways) OR “unidirectional” (from => to)  
+	speed_limit: in km/h
+	toll_road: true / false
+	Coordinates from_coords;
+	Coordinates to_coords;
 	all functions and constructors are mentioned in the documentation of ths code
 
 
--	Circle, inheritates from Shape, described by:
-#	Meters radius
-#	Coordinates coordinates;
+	Circle, inheritates from Shape, described by:
+	Meters radius
+	Coordinates coordinates;
 	all functions and constructors are mentioned in the documentation of ths code
 
-===============================================================================================================================================================================
-===============================================================================================================================================================================
 
 # Advanced-Topics-in-Programming-Navigation
 
@@ -219,10 +213,9 @@ Navigation Features:
 The Navigation System, based on the GIS that provided to it, can find the shortest route by distance and by time, given start and end points (Coordinates). the pointrs don't have to be on a certain way.
 The Navigation algorithm is based on the A-Star algorithm (which based on Dijkstra, whith modifications to boost the time complexity).
 
-#########################################################################################################################################################################################################################
 
 Navigation Public Functions:
-
+-
 
 public:
     //constractor
@@ -237,24 +230,19 @@ public:
     
 };
 
-################################################################################################################################################################################################################
-
 Assisting Mendatory Classes:
+-
+   Route:
+   std::vector<std::pair<EntityId, Direction>> all_ways
+   Coordinates start_point
+   Coordinates end_point
+   Meters total_length
+   Minutes est_duration
 
--	Route:
-#	std::vector<std::pair<EntityId, Direction>> all_ways
-#   Coordinates start_point
-#   Coordinates end_point
-#   Meters total_length
-#   Minutes est_duration
-
-- Routes:
- #   Route shortest_distance;
- #   Route shortest_time;
- #   bool is_valid;
-
-===============================================================================================================================================================================
-===============================================================================================================================================================================
+   Routes:
+   Route shortest_distance;
+   Route shortest_time;
+   bool is_valid;
 
 # Advanced-Topics-in-Programming-Simulator
 
