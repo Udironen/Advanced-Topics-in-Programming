@@ -1,3 +1,4 @@
+full details are in Exercises 1,2,3
 
 # GIS
 
@@ -251,5 +252,54 @@ Assisting Mendatory Classes:
 	   Route shortest_time;
 	   bool is_valid;
 
-# Advanced-Topics-in-Programming-Simulator
+# Simulator
+
+Simulator Features:
+-
+
+the Simulator can run several Navigation algorithms with several GIS libraries, using multithreading.
+Both the Navigation algorithms and the GIS are loaded dynamically as .so files
+The Simulator loads the same map file into all GIS instances and runs several given navigation requests on all combinations of <GIS>-<Navigation algorithm>.
+
+The expectations are that the resulting routes across all GIS instances, per a given navigation request and Navigation algorithm, would all be the same. All cases where this is not true (not all results are the same), lines which are not in consensus should be logged into “strange_GIS_results.log” with the following line:
+
+	Navigation name, shortests_<time/distance>, GIS name, {from}-{to}, calc distance (meters), calc time (minutes), valid
+	example:
+	Navigation_038754123, shortests_time, GIS_098765432, {40.7298, -73.9973}-{40.7295, -73.9967}, 1230.12, 2.01, 1
+	Navigation_038754123, shortests_time, GIS_038754123, {40.7298, -73.9973}-{40.7295, -73.9967}, 1230.15, 1.98, 0
+
+The score calculation would take into account only routes which got consensus. Routes without consensus for any of the Navigation algorithms (i.e. any cell) would be excluded for the entire column in the table.
+The scoring table shall be calculated according to the following rules, accumulatively: Algorithms which got an invalid route get -1 to their score (getting invalid route for both distance and time results with -2). Algorithms which didn’t get routes when there is a route also gets -2. All algorithms which got the best minimal time route get +1. All algorithms which got the best minimal distance route get +1. Those which were qualified for best route (minimal time / distance or both), if also using minimal GIS requests (out of those which got the best route either for best time or best distance or both), get additional +1 to their score. 
+Based on the calculated scores, create a .csv file with the name “simulation.results” with the following structure, including headline (replace with actual data):
+
+	Navigation Algorithm, <req1>, <req2>, <req3>, Total Score
+	Navigation_098765432, 3, 3, 1, 7
+	Navigation_032765555, 1, 3, 2, 6
+	Navigation_067765999, -1, -2, 1, -2
+
+Running the Simulator shall support the following command line options:
+-
+	simulator [-num_threads <num>] [-navigation <path>] [-gis <path>]
+	[-map_file <file_path>] [-navigation_requests <file_path>] [-output <path>]
+
+	Details:
+	The order of arguments may change
+	The -num_threads parameter dictates the number of parallel threads for running the simulation. This parameter is optional, in case it is not provided the simulator would not spawn any new threads (as if -num_threads is set to 1). See more under: Threading model.
+	The -navigation sets the location to look for the Navigation algorithm .so files.
+	This parameter is mandatory and shall be an absolute path
+	The -gis sets the location to look for the GIS .so files.
+	This parameter is mandatory and shall be an absolute path
+	The -map_file sets the map file to load.
+	This parameter is mandatory and shall include the absolute path and filename
+	The -navigation_requests sets the file name to use for navigation requests.
+	This parameter is mandatory and shall include the absolute path and filename
+	The -output sets the location for the simulator output files.
+	This parameter is optional, in case it is not provided the simulator would create the output files under the run directory / current working directory.
+
+The navigation_requests file
+-
+This will be a text file with a line per navigation_request in the following format:
+
+	{40.729824, -73.997302}-{40.729541, -73.996723}
+	{41.729824, -76.997302}-{41.729541, -76.996723}
 
