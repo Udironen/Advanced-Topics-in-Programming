@@ -1,5 +1,5 @@
 
-# Advanced-Topics-in-Programming-GIS
+# GIS
 
 The GIS data is based on:
 -	Coordinates: described by Longitude and Latitude
@@ -209,7 +209,7 @@ Circle, described by:
 	all functions and constructors are mentioned in the documentation of ths code
 
 
-# Advanced-Topics-in-Programming-Navigation
+# Navigation
 
 Navigation Features:
 -
