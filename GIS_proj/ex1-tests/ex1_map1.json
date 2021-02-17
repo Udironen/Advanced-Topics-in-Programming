@@ -1,0 +1,85 @@
+[
+
+    {
+        "type": "POI",
+        "id": "Pnt1",
+        "name": "name",
+        "description": "",
+        "category_tags": [],
+        "geometry": {
+            "type": "Circle",
+            "coordinates": [20, 70],
+            "radius": 1001.96
+        }
+    },
+
+    {
+        "type": "Junction",
+        "id": "Ju01",
+        "name": "UWS",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [-20.0, 30.0]
+    },
+
+    {
+        "type": "Junction",
+        "id": "Ju02",
+        "name": "LWS",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [-20.0, -20.0]
+    },
+
+    {
+        "type": "Junction",
+        "id": "Ju04",
+        "name": "LES",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [20.0, -20.0]
+    },
+    
+    {
+        "type": "Junction",
+        "id": "Ju03",
+        "name": "UES",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [20.0, 30.0]
+    },
+
+    {
+        "type": "Way",
+        "id": "West1",
+        "name": "Western Highway",
+        "description": "The western hemisphere highway",
+        "category_tags": ["highway"],
+        "from": {
+            "entity_id": "Ju01"
+        },
+        "to": {
+            "entity_id": "Ju02"
+        },
+        "direction": "bidirectional",
+        "speed_limit": 120,
+        "toll_road": true
+    },
+
+    {
+        "type": "Way",
+        "id": "East1",
+        "name": "Eastern Highway",
+        "description": "The Eastern hemisphere highway",
+        "category_tags": [],
+        "from": {
+            "entity_id": "Ju03"
+        },
+        "to": {
+            "entity_id": "Ju04"
+        },
+        "direction": "bidirectional",
+        "speed_limit": 120,
+        "toll_road": true
+    }
+]

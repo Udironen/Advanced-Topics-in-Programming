@@ -1,0 +1,104 @@
+[
+    {
+        "type": "POI",
+        "id": "P1001",
+        "name": "Washington Square Park",
+        "description": "To circle the square",
+        "category_tags": [],
+        "geometry": {
+            "type": "Circle",
+            "coordinates": [40.731051, -73.999611],
+            "radius": 3.2
+        }
+    },
+
+    {
+        "type": "POI",
+        "id": "P1002",
+        "name": "Washington Square Fountain",
+        "description": "",
+        "category_tags": ["Public"],
+        "geometry": {
+            "type": "Circle",
+            "coordinates": [40.730811, -73.997455],
+            "radius": 0.635
+        }
+    },
+
+    {
+        "type": "Junction",
+        "id": "J1001",
+        "name": "5th Ave & Washington Square N",
+        "description": ".*",
+        "category_tags": [],
+        "coordinates": [40.731437, -73.996967]
+    },
+
+    {
+        "type": "Junction",
+        "id": "J1002",
+        "name": "5th Ave & 8th St",
+        "description": ".*",
+        "category_tags": [],
+        "coordinates": [40.732254, -73.996394]
+    },
+
+    {
+        "type": "Junction",
+        "id": "J1010",
+        "name": "6th Ave & 8th St",
+        "description": "6 Ave & Greenwich Ave & 8th St",
+        "category_tags": [],
+        "coordinates": [40.732254, -73.996394]
+    },
+
+    {
+        "type": "POI",
+        "id": "P1010",
+        "name": "Elmer Holmes Bobst Library",
+        "description": "The Elmer Holmes Bobst Library, often referred to as simply Bobst Library or Bobst, is the main library at New York University in Manhattan, New York City",
+        "category_tags": [],
+        "geometry": {
+            "type": "Circle",
+            "coordinates": [40.729824, -73.997302],
+            "radius": 1.2
+        }
+    },
+
+    {
+        "type": "Way",
+        "id": "W2001",
+        "name": "5th Ave btw. Washington Square N & 8th St",
+        "description": ".*",
+        "category_tags": [],
+        "from": {
+            "entity_id": "J1002"
+        },
+        "to": {
+            "entity_id": "J1001"
+        },
+        "direction": "unidirectional",
+        "speed_limit": 40,
+        "toll_road": false,
+        "restricted": ["trucks"]
+    },
+
+    {
+        "type": "Way",
+        "id": "W2002",
+        "name": "8th St btw. 6th Ave & 5th Ave",
+        "description": ".*",
+        "category_tags": [],
+        "from": {
+            "entity_id": "J1010"
+        },
+        "to": {
+            "entity_id": "J1002"
+        },
+        "curves": [[40.733566, -73.999446]],
+        "speed_limit": 40,
+        "direction": "unidirectional",
+        "toll_road": false,
+        "restricted": ["trucks"]
+    }
+]

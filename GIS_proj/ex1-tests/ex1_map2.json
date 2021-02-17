@@ -1,0 +1,87 @@
+[
+
+    {
+        "type": "POI",
+        "id": "P1",
+        "name": "vip",
+        "description": "",
+        "category_tags": [],
+        "geometry": {
+            "type": "Circle",
+            "coordinates": [20.730811, 10.997455],
+            "radius": 100.96
+        }
+    },
+
+    {
+        "type": "Junction",
+        "id": "J1",
+        "name": "UWS",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [-30.0, 80.0]
+    },
+
+    {
+        "type": "Junction",
+        "id": "J2",
+        "name": "LWS",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [-30.0, -10.0]
+    },
+
+    {
+        "type": "Junction",
+        "id": "J3",
+        "name": "LES",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [30.0, -10.0]
+    },
+    
+    {
+        "type": "Junction",
+        "id": "J4",
+        "name": "UES",
+        "description": "N/A",
+        "category_tags": [],
+        "coordinates": [30.0, 80.0]
+    },
+
+    {
+        "type": "Way",
+        "id": "W1",
+        "name": "A_way",
+        "description": "Nothing above it",
+        "category_tags": [],
+        "from": {
+            "entity_id": "J1"
+        },
+        "to": {
+            "entity_id": "J4"
+        },
+        "direction": "unidirectional",
+        "speed_limit": 100,
+        "toll_road": false,
+        "restricted": ["trucks"]
+    },
+
+    {
+        "type": "Way",
+        "id": "W2",
+        "name": "A_way",
+        "description": "Nothing below it?",
+        "category_tags": [],
+        "from": {
+            "entity_id": "J3"
+        },
+        "to": {
+            "entity_id": "J2"
+        },
+        "direction": "bidirectional",
+        "speed_limit": 100,
+        "toll_road": true,
+        "restricted": ["trucks"]
+    }
+]

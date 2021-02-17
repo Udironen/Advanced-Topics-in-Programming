@@ -1,0 +1,71 @@
+[
+    {
+        "type": "Junction",
+        "id": "TL",
+        "name": "TL",
+        "description": "?",
+        "category_tags": [],
+        "coordinates": [44.361, 33.312]
+    },
+
+    {
+        "type": "Junction",
+        "id": "BL",
+        "name": "BL",
+        "description": "?",
+        "category_tags": [],
+        "coordinates": [44.361, 27.312]
+    },
+
+    {
+        "type": "Way",
+        "id": "LeftWay",
+        "name": "Left Highway",
+        "description": "The western hemisphere highway",
+        "category_tags": ["highway"],
+        "from": {
+            "entity_id": "BL"
+        },
+        "to": {
+            "entity_id": "TL"
+        },
+        "direction": "unidirectional",
+        "speed_limit": 120,
+        "toll_road": true
+    },
+
+    {
+        "type": "Junction",
+        "id": "TR",
+        "name": "TR",
+        "description": "?",
+        "category_tags": [],
+        "coordinates": [50.361, 33.312]
+    },
+    
+    {
+        "type": "Junction",
+        "id": "BR",
+        "name": "BR",
+        "description": "?",
+        "category_tags": [],
+        "coordinates": [50.361, 27.312]
+    },
+
+    {
+        "type": "Way",
+        "id": "RightWay",
+        "name": "Right Highway",
+        "description": "The Eastern hemisphere highway",
+        "category_tags": ["highway"],
+        "from": {
+            "entity_id": "BR"
+        },
+        "to": {
+            "entity_id": "TR"
+        },
+        "direction": "unidirectional",
+        "speed_limit": 120,
+        "toll_road": true
+    }
+]
