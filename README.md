@@ -1,111 +1,111 @@
 
 # Advanced-Topics-in-Programming-GIS
 
-The GIS data is based on:
--	Coordinates: described by Longitude and Latitude
--	Point of Interest
--	Junctions and roads, represented as coordinates connected by ways/arcs
--	A separation of data into blocks or cells, to allow quick search of given coordinates (which road I’m on? what is near me?) without the need to search the entire map
+	The GIS data is based on:
+	-	Coordinates: described by Longitude and Latitude
+	-	Point of Interest
+	-	Junctions and roads, represented as coordinates connected by ways/arcs
+	-	A separation of data into blocks or cells, to allow quick search of given coordinates (which road I’m on? what is near me?) without the need to search the entire map
 
 
-Features:
+	Features:
 
-The GIS can load a Json file by the following structure:
-[
-  {
-    "type": "POI",
-    "id": "P1001",
-    "name": "Washington Square Park",
-    "description": "To circle the square",
-    "category_tags": [ "" ],
-    "geometry": {
-      "type": "Circle",
-      "coordinates": [ 40.731051, -73.999611 ],
-      "radius": 100000.2
-    }
-  },
-  
-  {
-    "type": "Junction",
-    "id": "J1001",
-    "name": "5th Ave & Washington Square N",
-    "description": ".*",
-    "category_tags": [],
-    "coordinates": [ 37.731437, -73.996967 ]
-  },
+	The GIS can load a Json file by the following structure:
+	[
+	  {
+	    "type": "POI",
+	    "id": "P1001",
+	    "name": "Washington Square Park",
+	    "description": "To circle the square",
+	    "category_tags": [ "" ],
+	    "geometry": {
+	      "type": "Circle",
+	      "coordinates": [ 40.731051, -73.999611 ],
+	      "radius": 100000.2
+	    }
+	  },
 
-  {
-    "type": "Junction",
-    "id": "J1002",
-    "name": "5th Ave & 8th St",
-    "description": ".*",
-    "category_tags": [],
-    "coordinates": [ 40.732254, -73.996394 ]
-  },  
-  {
-    "type": "Way",
-    "id": "W2001",
-    "name": "5th Ave btw. Washington Square N & 8th St",
-    "description": ".*",
-    "category_tags": [],
-    "from": {
-      "entity_id": "J1002"
-    },
-    "to": {
-      "entity_id": "J1001"
-    },
-    "curves": [ [ 1, 0 ] ],
-    "direction": "unidirectional",
-    "speed_limit": 40,
-    "toll_road": false,
-    "restricted": [ "trucks" ]
-  },
-  
-]
+	  {
+	    "type": "Junction",
+	    "id": "J1001",
+	    "name": "5th Ave & Washington Square N",
+	    "description": ".*",
+	    "category_tags": [],
+	    "coordinates": [ 37.731437, -73.996967 ]
+	  },
 
+	  {
+	    "type": "Junction",
+	    "id": "J1002",
+	    "name": "5th Ave & 8th St",
+	    "description": ".*",
+	    "category_tags": [],
+	    "coordinates": [ 40.732254, -73.996394 ]
+	  },  
+	  {
+	    "type": "Way",
+	    "id": "W2001",
+	    "name": "5th Ave btw. Washington Square N & 8th St",
+	    "description": ".*",
+	    "category_tags": [],
+	    "from": {
+	      "entity_id": "J1002"
+	    },
+	    "to": {
+	      "entity_id": "J1001"
+	    },
+	    "curves": [ [ 1, 0 ] ],
+	    "direction": "unidirectional",
+	    "speed_limit": 40,
+	    "toll_road": false,
+	    "restricted": [ "trucks" ]
+	  },
 
-The GIS can save the data it contains to a Json file with the same structure.
--
-The GIS can search entities by name, and also in a restricted erea.
--
-The GIS can find the closest way to a specific coordinates, and the closest coordinates on it.
--
-The GIS can find the closest point on an entity of the GIS to another coordinates.
--
+	]
 
 
-API for searching data
--
-Types
-template<typename T>
-class NamedType {
-	T val;
-public:
-	explicit NamedType(const T& t): val(t) {}
-	operator const T&() const {
-		return val;
-}
-};
+	The GIS can save the data it contains to a Json file with the same structure.
+	
+	The GIS can search entities by name, and also in a restricted erea.
+	
+	The GIS can find the closest way to a specific coordinates, and the closest coordinates on it.
+	
+	The GIS can find the closest point on an entity of the GIS to another coordinates.
+	
 
-struct Longitude: NamedType<double> { using NamedType<double>::NamedType;  };
-struct Latitude: NamedType<double> { using NamedType<double>::NamedType; };
-struct Meters: NamedType<double> { using NamedType<double>::NamedType; };
 
-strt EntityId: NamedType<std::string> { 
-  using NamedType<std::string>::NamedType;
-};
+	API for searching data
+	-
+	Types
+	template<typename T>
+	class NamedType {
+		T val;
+	public:
+		explicit NamedType(const T& t): val(t) {}
+		operator const T&() const {
+			return val;
+	}
+	};
 
-class Coordinates {
-       Longitude _longitude;
-       Latitude _latitude;
-public:
-       Coordinates(Longitude longitude, Latitude latitude) : _longitude(longitude), _latitude(latitude) {}
-       Longitude longitude() const { return _longitude; }
-       Latitude latitude () const { return _latitude; }
-       bool operator==(const Coordinates& rhs) const {
-               return _longitude == rhs._longitude && _latitude == rhs._latitude;
-       }
-};
+	struct Longitude: NamedType<double> { using NamedType<double>::NamedType;  };
+	struct Latitude: NamedType<double> { using NamedType<double>::NamedType; };
+	struct Meters: NamedType<double> { using NamedType<double>::NamedType; };
+
+	strt EntityId: NamedType<std::string> { 
+	  using NamedType<std::string>::NamedType;
+	};
+
+	class Coordinates {
+	       Longitude _longitude;
+	       Latitude _latitude;
+	public:
+	       Coordinates(Longitude longitude, Latitude latitude) : _longitude(longitude), _latitude(latitude) {}
+	       Longitude longitude() const { return _longitude; }
+	       Latitude latitude () const { return _latitude; }
+	       bool operator==(const Coordinates& rhs) const {
+		       return _longitude == rhs._longitude && _latitude == rhs._latitude;
+	       }
+	};
 
 
 GIS Public Functions:
