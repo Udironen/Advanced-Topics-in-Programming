@@ -1,22 +1,22 @@
 # Grid-ex4
 
-Inprogram manages a â€œSpherical Gridâ€ class holding data according to Geo-location, based on the following requirements:
--	The â€œSpherical Gridâ€ is aimed to manage data that is owned by other data structures.
--	The actual data is of an unknown type (modeled as a Template parameter) and should support polymorphism, that is if the template parameter passed to the Grid is â€œEntityâ€ then it shall support managing â€œEntityâ€ and any class which is publicly derived from â€œEntityâ€.
+Inprogram manages a “Spherical Grid” class holding data according to Geo-location, based on the following requirements:
+-	The “Spherical Grid” is aimed to manage data that is owned by other data structures.
+-	The actual data is of an unknown type (modeled as a Template parameter) and should support polymorphism, that is if the template parameter passed to the Grid is “Entity” then it shall support managing “Entity” and any class which is publicly derived from “Entity”.
 -	Geo-location shall be managed based on a Coordinates class.
 -	Geo-location calculations shall be based on a CoordinatesMath class.
--	The Grid model is described below, it would be similar (though, not necessarily exactly as) â€œKurihara reduced gridâ€ (see original paper from 1965).
+-	The Grid model is described below, it would be similar (though, not necessarily exactly as) “Kurihara reduced grid” (see original paper from 1965).
 
 Grid Cells
 -
 
-â—	All cells are of the same â€œheightâ€ (â€œdistanceâ€ between cellâ€™s bottom latitude and cellâ€™s top latitude is the same for all cells).
-â—	Cells have different â€œwidthâ€ (â€œdistanceâ€ between cellâ€™s left longitude and cellâ€™s right longitude) - according to their distance from the equator. Cells which are closer to the equator would have smaller â€œwidthâ€ (more cells at this latitude). Cells which are closer to the poles would have bigger â€œwidthâ€ (less cells at this latitude).
-â—	The â€œfirstâ€ cell for each given latitude (â€œrowâ€) would always have its â€œleftâ€ longitude exactly on zero (â€œGreenwich lineâ€). And the â€œlastâ€ cell on the â€œrowâ€ would always have its â€œrightâ€ longitude exactly on zero. 
-â—	Number of â€œrowsâ€ in the grid is provided to the Grid class as a template parameter - see below. Note that the equator can be between rows or exactly in the middle of the  middle row of the grid, depending on whether the number of rows is even or odd.
-â—	Number of â€œcolsâ€ in the grid, per a given â€œrowâ€ is calculated so that the actual area size of all cells would be approximately the same. 
+?	All cells are of the same “height” (“distance” between cell’s bottom latitude and cell’s top latitude is the same for all cells).
+?	Cells have different “width” (“distance” between cell’s left longitude and cell’s right longitude) - according to their distance from the equator. Cells which are closer to the equator would have smaller “width” (more cells at this latitude). Cells which are closer to the poles would have bigger “width” (less cells at this latitude).
+?	The “first” cell for each given latitude (“row”) would always have its “left” longitude exactly on zero (“Greenwich line”). And the “last” cell on the “row” would always have its “right” longitude exactly on zero. 
+?	Number of “rows” in the grid is provided to the Grid class as a template parameter - see below. Note that the equator can be between rows or exactly in the middle of the  middle row of the grid, depending on whether the number of rows is even or odd.
+?	Number of “cols” in the grid, per a given “row” is calculated so that the actual area size of all cells would be approximately the same. 
 
-Gridâ€™s public API
+Grid’s public API
 -
 
 template<typename Entity, std::size_t num_rows> requires (num_rows > 0)
@@ -40,7 +40,7 @@ Getting Cells from the Grid:
 
 (Grid::B2)  std::vector<const Cell*> getCellsAt(Coordinates center, Meters radius) const;
 Notes: there is no defined order for the returned cells. Same cell shall not appear twice of course. 
-â€ƒ
+?
 additional auxiliary functions:
 (Grid::C1)	std::size_t numRows() const noexcept; 
 (Grid::C2)	std::size_t numCols(Coordinates c) const noexcept; 
@@ -53,7 +53,7 @@ Iiterating will return all cells.
 The iterators are implemented by another helper-class.
 Since the grid is not sparce, the iterator iterates over all Cells.
 
-Cellâ€™s public API
+Cell’s public API
 -
 
 Cell shall be a nested private* class inside class Grid.
@@ -87,7 +87,7 @@ returns a range of all entities of type ActualT.
 
 NOTEs:
 (1)	Complexity of this function is O(1)
-(2)	This function returns a view that is updated â€œbehind the sceneâ€ automatically in case additional objects of type ActualT are added to this Cell via the Grid. Order of entities in the view will be the same as the order of their insertion to the grid.
+(2)	This function returns a view that is updated “behind the scene” automatically in case additional objects of type ActualT are added to this Cell via the Grid. Order of entities in the view will be the same as the order of their insertion to the grid.
 (3)	Iterating over the returned view generates pointers with the correct type, i.e. ActualT*.
 
 Additional auxiliary functions:
@@ -111,4 +111,3 @@ ________________________________________
 Tests:
 There are multiple tests in tests.cpp file
 ________________________________________
-
